@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="https://unpkg.com/mobi.css/dist/mobi.min.css">
+</head>
+<body>
+<div class="flex-center">
+    <div class="container">
+    <div class="flex-center">
+    <div class="unit-1-2 unit-1-on-mobile">
+        {% if userLogin %}
+            <h1>用户登录</h1>
+        {% else %}
+            <h1>用户注册</h1>
+        {% endif %}
+        {% if tips %}
+            <div>{{ tips }}</div>
+        {% endif %}
+        <form class="form" action="" method="post">
+            {% csrf_token %}
+            <div>用户名:{{ user.username }}</div>
+            <div>密  码:{{ user.password1 }}</div>
+            {% if not userLogin %}
+            <div>密码确认:{{ user.password2 }}</div>
+            <div>邮  箱:{{ user.email }}</div>
+            <input id="Text1" type="text" name="em" value=""/>
+            {% endif %}
+            <button type="submit" class="btn btn-primary btn-block">确 认</button>
+        </form>
+    </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

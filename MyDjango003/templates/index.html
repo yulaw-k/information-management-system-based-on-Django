@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+    <title>student information system</title>
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+            <h1 class="profile__tit">
+                <span class="profile__name" style="font-family: 幼圆">欢迎进入学生信息管理系统</span>
+            </h1>
+        </div>
+    </div>
+    <div style="height: 330px;">
+    <div style="text-align: center;">
+        <a href="{% url 'user:info' %}" ><button type="button" style="margin-top:30px;height:30px;width: 200px;background-color:aliceblue;border:1px silver solid;">开始</button></a>
+        <br />
+        <a href="{% url 'user:login' %}" ><button type="button" style="margin-top:30px;height:30px;width: 200px;background-color:aliceblue;border:1px silver solid;" name="b1" value="1">登录</button></a>
+        <br />
+        <a href="{% url 'user:register' %}" ><button type="button" style="margin-top:30px;height:30px;width: 200px;background-color:aliceblue;border:1px silver solid;">注册</button></a>
+        <br />
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>学生信息管理系统</title>
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+        	{#模板上下文user是User或AnoymousUser对象#}
+            {% if user.is_authenticated %}
+            <div class="profile__cover_link">
+                <img src="{% static "image/user.png" %}" class="profile__cover">
+            </div>
+            <h1 class="profile__tit">
+                <span class="profile__name">{{ user.username }}</span>
+            </h1>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
+            {% endif %}
+        </div>
+    </div>
+    <div style="height:500px;text-align: center;">
+        <div style="text-align: center;"><span style="font-family: 幼圆;font-size: 40px;">学生信息管理系统</span></div>
+        <div style="margin-top:50px;"><a href="create.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">添加学生信息</span></button></a></div>
+        <div style="margin-top:50px;"><a href="update.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">修改学生信息</span></button></a></div>
+        <div style="margin-top:50px;"><a href="query.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">查询学生信息</span></button></a></div>
+        <div style="margin-top:50px;"><a href="delete.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">删除学生信息</span></button></a></div>
+    </div>
+</body>
+</html>

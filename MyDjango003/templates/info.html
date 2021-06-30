@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+{% load static %}
+<title>个人信息板块</title>
+<link rel="stylesheet" href="{% static "css/common.css" %}">
+<link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+        	{#模板上下文user是User或AnoymousUser对象#}
+            {% if user.is_authenticated %}
+            <div class="profile__cover_link">
+                <img src="{% static "image/user.png" %}" class="profile__cover">
+            </div>
+            <h1 class="profile__tit">
+                <span class="profile__name">{{ user.username }}</span>
+            </h1>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
+            {% endif %}
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <div style="margin-top:50px;"><a href="infoManage.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">信息管理模块</span></button></a></div>
+        <div style="margin-top:50px;"><a href="schedule.html"><button type="button" style="border:1px snow solid;width:250px; height:30px;background-color:mediumpurple;color:white"><span style="font-family: 黑体;">日程安排模块</span></button></a></div>
+    </div>
+</body>
+</html>

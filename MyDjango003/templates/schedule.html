@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title>日程安排模块</title>
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+        	{#模板上下文user是User或AnoymousUser对象#}
+            {% if user.is_authenticated %}
+            <div class="profile__cover_link">
+                <img src="{% static "image/user.png" %}" class="profile__cover">
+            </div>
+            <h1 class="profile__tit">
+                <span class="profile__name">{{ user.username }}</span>
+
+            </h1>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
+            {% endif %}
+        </div>
+    </div>
+    <div style="text-align: center;"><span style="font-family: 幼圆;font-size: 40px;">日程安排</span><a href="{% url 'user:info' %}"><span style="font-family: 幼圆;font-size: 14px;">&emsp;&emsp;回到个人主页</span></a></div>
+
+    <div style="padding-left: 40%;margin-bottom: 100px;">
+        {% if v.errors %}
+        <p>数据出错啦，错误信息：{{ v.errors }}</p>
+    {% else %}
+            <div><span style="font-family: 黑体;font-size: 22px;">在此添加新的日程安排</span></div>
+        <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{ v.as_table }}
+        </table>
+            <br>
+            <input type="hidden" value="{{ user.username }}" name="username">
+        <input type="submit" value="提交" style="width: 200px;height: 30px;">
+        {% if tips %}
+            <span>{{ tips }}</span>
+        {% endif %}
+        </form>
+    {% endif %}
+
+        <div style="margin-top: 50px;">
+            <span style="font-family: 幼圆;font-size: 22px;">当前日程安排</span>
+        </div>
+        <div style="margin-top: 30px;">
+            <ul>
+                {% for i in p %}
+
+                    <li style="font-family: 幼圆;font-size: 26px;">标题：{{ i.title }}</li>
+                    <li style="font-family: 幼圆;font-size: 16px;">{{ i.content }}</li>
+                    <li style="font-family: 幼圆;font-size: 14px;">开始时间：{{ i.beginDate }}</li>
+                    <li style="font-family: 幼圆;font-size: 14px;">结束时间：{{ i.endDate }}</li>
+                    <div style="height: 50px;"></div>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+</body>
+</html>

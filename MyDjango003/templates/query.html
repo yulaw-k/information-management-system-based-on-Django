@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+        	{#模板上下文user是User或AnoymousUser对象#}
+            {% if user.is_authenticated %}
+            <div class="profile__cover_link">
+                <img src="{% static "image/user.png" %}" class="profile__cover">
+            </div>
+            <h1 class="profile__tit">
+                <span class="profile__name">{{ user.username }}</span>
+            </h1>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
+            {% endif %}
+        </div>
+    </div>
+    <div style="text-align: center;margin-bottom: 50px;"><span style="font-family: 幼圆;font-size: 36px">{{ title }}</span><a href="{% url 'user:info' %}"><span style="font-family: 幼圆;font-size: 14px;">&emsp;&emsp;回到个人主页</span></a></div>
+    <div style="padding-left: 40%;margin-bottom: 100px;">
+    <form method="post">
+        {% csrf_token %}
+        <span>输入姓名以查询该学生的个人信息：</span>
+        <input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="name">
+        <input style="width: 80px;height: 30px;background-color: #008ef5;color: white;border: #c9c9c9" type="submit" value="确定">
+        {% if tips %}
+            <span>{{ tips }}</span>
+        {% endif %}
+        <br>
+        <br>
+        <table border="1">
+            <tr>
+                <th>姓名</th>
+                <th>专业</th>
+                <th>性别</th>
+                <th>手机号</th>
+                <th>年龄</th>
+                <th>家庭地址</th>
+            </tr>
+            {% for i in p %}
+            <tr>
+                <th>{{ i.name }}</th>
+                <th>{{ i.major }}</th>
+                <th>{{ i.sex }}</th>
+                <th>{{ i.number }}</th>
+                <th>{{ i.age }}</th>
+                <th>{{ i.address }}</th>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</div>
+</body>
+</html>

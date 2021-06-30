@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static "css/common.css" %}">
+    <link rel="stylesheet" href="{% static "css/home.css" %}">
+</head>
+<body class="member">
+    <div class="mod_profile js_user_data">
+        <div class="section_inner">
+        	{#模板上下文user是User或AnoymousUser对象#}
+            {% if user.is_authenticated %}
+            <div class="profile__cover_link">
+                <img src="{% static "image/user.png" %}" class="profile__cover">
+            </div>
+            <h1 class="profile__tit">
+                <span class="profile__name">{{ user.username }}</span>
+            </h1>
+                <a href="{% url 'user:logout' %}" style="color:white;">退出登录</a>
+            {% endif %}
+        </div>
+    </div>
+    <div style="text-align: center;height: 500px;">
+    <div style="margin-bottom: 50px;"><span style="font-family: 幼圆;font-size: 36px">{{ title }}</span><a href="{% url 'user:info' %}"><span style="font-family: 幼圆;font-size: 14px;">&emsp;&emsp;回到个人主页</span></a></div>
+    <form method="post">
+        {% csrf_token %}
+        <span>输入姓名以新增学生的个人信息：</span><br>
+        <span style="font-size: 20px;font-family: 幼圆">姓名</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="name" value="{{ name }}"><br>
+        <span style="font-size: 20px;font-family: 幼圆">专业</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="major" value="{{ major }}"><br>
+        <span style="font-size: 20px;font-family: 幼圆">性别</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="sex" value="{{ sex }}"><br>
+        <span style="font-size: 20px;font-family: 幼圆">手机号</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="number" value="{{ number }}"><br>
+        <span style="font-size: 20px;font-family: 幼圆">年龄</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="age" value="{{ age }}"><br>
+        <span style="font-size: 20px;font-family: 幼圆">家庭地址</span><input style="margin-left:3px;height: 30px;width: 200px;margin-bottom: 5px;" type="text" name="address" value="{{ address }}"><br>
+        {% if tips %}
+            <span>{{ tips }}</span>
+        {% endif %}
+        <br>
+        <input style="width: 80px;height: 30px;background-color: #008ef5;color: white;border: #c9c9c9" type="submit" value="确定">
+    </form>
+</div>
+</body>
+</html>
